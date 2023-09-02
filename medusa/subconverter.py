@@ -36,7 +36,7 @@ class SubConverter:
                             tj.username, "@",
                             tj.hostname, ":",
                             str(tj.port), "?",
-                            f"serverName={parse_qs(tj.query)['sni']}",
+                            f"serverName={parse_qs(tj.query)['sni'][0]}",
                             "&skip-cert-verify=true",
                             "#", unquote(tj.fragment)))
 
