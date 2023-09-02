@@ -7,3 +7,5 @@ test.ipynb
 backups
 err.txt
 *.so
+config.yml
+glider.conf
