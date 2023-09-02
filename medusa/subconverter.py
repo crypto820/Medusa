@@ -23,10 +23,22 @@ class SubConverter:
     @staticmethod
     def _to_glider(parse_results: List[ParseResult]):
         def handle_ss(ss: ParseResult):
-            return ''.join(("forward=", ss.scheme, "://", b64decode_urlsafe(ss.username), "@", ss.hostname, ":", str(ss.port), "#", str(ss.fragment)))
+            return ''.join(("forward=",
+                            ss.scheme, "://",
+                            b64decode_urlsafe(ss.username), "@",
+                            ss.hostname, ":",
+                            str(ss.port), "#",
+                            unquote(ss.fragment)))
 
         def handle_trojan(tj: ParseResult):
-            return ''.join(("forward=", tj.scheme, "://", tj.username, "@", tj.hostname, ":", str(tj.port), "?", tj.query, "#", str(tj.fragment)))
+            return ''.join(("forward=",
+                            tj.scheme, "://",
+                            tj.username, "@",
+                            tj.hostname, ":",
+                            str(tj.port), "?",
+                            tj.query,
+                            "&skip-cert-verify=true",
+                            "#", unquote(tj.fragment)))
 
         res = list()
         for r in parse_results:
