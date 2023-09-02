@@ -1,7 +1,7 @@
 import base64
 import logging
 from typing import Literal, List
-from urllib.parse import ParseResult, unquote
+from urllib.parse import ParseResult, unquote, parse_qs
 
 
 def b64decode_urlsafe(s: str) -> str:
@@ -36,7 +36,7 @@ class SubConverter:
                             tj.username, "@",
                             tj.hostname, ":",
                             str(tj.port), "?",
-                            tj.query,
+                            f"serverName={parse_qs(tj.query)['sni']}",
                             "&skip-cert-verify=true",
                             "#", unquote(tj.fragment)))
 
