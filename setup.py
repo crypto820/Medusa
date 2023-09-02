@@ -40,14 +40,7 @@ setup(
     },
     install_requires=[
         'requests==2.31.0',
-        'pandas~=2.0.1',
-        'numpy==1.24.3',
-        'h5py~=3.8.0',
-        'websocket-client==1.4.2',
-        'pyzmq~=24.0.1',
-        'setproctitle~=1.3.2',
-        'psycopg==3.1.9',
-        'aiohttp==3.8.5'
+        'pyyaml==6.0'
     ],
     package_dir={"": "."},
     package_data={
