@@ -1,0 +1,9 @@
+.idea
+__pycache__
+medusa.egg-info
+build
+logs
+test.ipynb
+backups
+err.txt
+*.so

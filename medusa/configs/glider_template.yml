@@ -1,0 +1,6 @@
+verbose=True
+listen=:1080
+
+strategy=rr
+check=http://www.msftconnecttest.com/connecttest.txt#expect=200
+checkinterval=360
