@@ -1,7 +1,7 @@
 import base64
 import logging
 from typing import Literal, List
-from urllib.parse import ParseResult, unquote, parse_qs
+from urllib.parse import ParseResult, unquote, parse_qs, urlparse, urlunparse
 
 
 def b64decode_urlsafe(s: str) -> str:
@@ -12,6 +12,18 @@ def b64decode_urlsafe(s: str) -> str:
 
 
 class SubConverter:
+    @staticmethod
+    def dedup_urls(urls):
+        deduped_urls = {}
+        for url in urls:
+            parsed_url = urlparse(url)
+            url_without_fragment = urlunparse(
+                (parsed_url.scheme, parsed_url.netloc, parsed_url.path, parsed_url.params, parsed_url.query, ""))
+            if url_without_fragment not in deduped_urls or not deduped_urls[url_without_fragment]:
+                deduped_urls[url_without_fragment] = parsed_url.fragment
+        final_urls = [url + ("#" + fragment if fragment else "") for url, fragment in deduped_urls.items()]
+        return final_urls
+
     @staticmethod
     def convert(backend: str, parse_results: List[ParseResult]):
         match backend:
@@ -46,4 +58,4 @@ class SubConverter:
             pr = eval(f"handle_{r.scheme}")(r)
             logging.info(f"Constructed '{pr}'")
             res.append(pr)
-        return res
+        return SubConverter.dedup_urls(res)
