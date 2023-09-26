@@ -1,6 +1,6 @@
 import base64
 import logging
-from typing import Literal, List
+from typing import List
 from urllib.parse import ParseResult, unquote, parse_qs, urlparse, urlunparse
 
 
@@ -37,7 +37,7 @@ class SubConverter:
         def handle_ss(ss: ParseResult):
             return ''.join(("forward=",
                             ss.scheme, "://",
-                            b64decode_urlsafe(ss.username), "@",
+                            ss.username, "@",
                             ss.hostname, ":",
                             str(ss.port), "#",
                             unquote(ss.fragment)))
@@ -54,6 +54,13 @@ class SubConverter:
 
         res = list()
         for r in parse_results:
+            logging.info(f"Preprocessing {r}")
+            if r.username is None:
+                netloc = b64decode_urlsafe(r.netloc)
+                r = urlparse(urlunparse(r).replace(r.netloc, netloc))
+            if r.password == '':
+                username = b64decode_urlsafe(r.username)
+                r = urlparse(urlunparse(r).replace(r.username, username))
             logging.info(f"Handling {r}")
             pr = eval(f"handle_{r.scheme}")(r)
             logging.info(f"Constructed '{pr}'")
