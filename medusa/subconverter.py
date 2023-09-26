@@ -37,7 +37,8 @@ class SubConverter:
         def handle_ss(ss: ParseResult):
             return ''.join(("forward=",
                             ss.scheme, "://",
-                            ss.username, "@",
+                            ss.username, ":",
+                            ss.password, "@",
                             ss.hostname, ":",
                             str(ss.port), "#",
                             unquote(ss.fragment)))
