@@ -78,7 +78,7 @@ class SubConverter:
                     ":",
                     str(tj.port),
                     "?",
-                    f"serverName={parse_qs(tj.query).get('sni', [""])[0]}",
+                    f"serverName={parse_qs(tj.query).get('sni')}",
                     "&skip-cert-verify=true",
                     "#",
                     unquote(tj.fragment),
