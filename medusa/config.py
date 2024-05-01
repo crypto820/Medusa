@@ -3,12 +3,13 @@ from functools import cache
 
 import yaml
 
+
 CONFIG_DIR = f"{os.path.dirname(__file__)}/configs"
 
 
 @cache
 def __config(path: str):
-    with open(path, 'r') as f:
+    with open(path, "r") as f:
         return yaml.load(f, yaml.FullLoader)
 
 
@@ -18,7 +19,7 @@ def config(file: str = "config"):
 
 @cache
 def __template(path: str):
-    with open(path, 'r') as f:
+    with open(path, "r") as f:
         return f.readlines()
 
 

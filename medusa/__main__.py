@@ -12,9 +12,11 @@ from medusa.subconverter import SubConverter
 
 
 def setup_logger():
-    logging.basicConfig(level=logging.INFO,
-                        format="[%(asctime)s] [%(levelname)s] - %(message)s - [%(filename)s:%(lineno)d]",
-                        datefmt="%Y-%m-%d %H:%M:%S")
+    logging.basicConfig(
+        level=logging.INFO,
+        format="[%(asctime)s] [%(levelname)s] - %(message)s - [%(filename)s:%(lineno)d]",
+        datefmt="%Y-%m-%d %H:%M:%S",
+    )
 
 
 def fetch_config(url: str) -> List[ParseResult]:
