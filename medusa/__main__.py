@@ -21,7 +21,10 @@ def setup_logger():
 
 def fetch_config(url: str) -> List[ParseResult]:
     logging.info(f"Handling subscription {url}")
-    b64 = requests.get(url)
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    }
+    b64 = requests.get(url, headers=headers)
     hosts = base64.b64decode(b64.content).decode().splitlines(keepends=False)
     print(hosts[0])
     return [urlparse(host) for host in hosts if len(host)]
