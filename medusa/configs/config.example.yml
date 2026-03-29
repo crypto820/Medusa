@@ -1,0 +1,6 @@
+# Demo config tracked in the repository.
+# Decodes to:
+# ss://YWVzLTI1Ni1nY206cGFzc0BleGFtcGxlLmNvbTo4MDgw#node
+subscriptions_base64:
+  - |
+    c3M6Ly9ZV1Z6TFRJMU5pMW5ZMjA2Y0dGemMwQmxlR0Z0Y0d4bExtTnZiVG80TURndyNub2RlCg==

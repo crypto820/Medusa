@@ -9,3 +9,5 @@ err.txt
 *.so
 config.yml
 glider.conf
+clash.yaml
+clash.yml

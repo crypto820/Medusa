@@ -38,7 +38,7 @@ setup(
             f"medusa = {PROJECT_NAME}.__main__:main",
         ]
     },
-    install_requires=["requests==2.31.0", "pyyaml==6.0"],
+    install_requires=["pyyaml==6.0"],
     package_dir={"": "."},
     package_data={
         f"{PROJECT_NAME}.configs": ["*.yml"],

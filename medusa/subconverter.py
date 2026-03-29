@@ -67,6 +67,16 @@ class SubConverter:
             )
 
         def handle_trojan(tj: ParseResult):
+            query = parse_qs(tj.query)
+            server_name = (
+                query.get("sni", [None])[0]
+                or query.get("peer", [None])[0]
+                or None
+            )
+            query_parts = []
+            if server_name:
+                query_parts.append(f"serverName={server_name}")
+            query_parts.append("skipVerify=true")
             return "".join(
                 (
                     "forward=",
@@ -78,8 +88,7 @@ class SubConverter:
                     ":",
                     str(tj.port),
                     "?",
-                    f"serverName={parse_qs(tj.query).get('sni')}",
-                    "&skip-cert-verify=true",
+                    "&".join(query_parts),
                     "#",
                     unquote(tj.fragment),
                 )
